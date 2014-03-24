@@ -21,21 +21,38 @@ $arr_files = scandir($path);
 
 $i = 2;
 
+/*
 while ($i < count($arr_files)) {
     $sub = substr($arr_files[$i], 0, 9);
     $i2 = 0;
         while ($i2 < count($arr_files)) {
             $sub2 = "z".strpos($arr_files[$i2], $sub);
-            $i3 = 0;
-            if ($sub2 == "z0" && $i2 != $i) {
+            if ($sub2 == "z0" ) {
                 echo "Lauf Nr.".$i." <br />";
                 echo $arr_files[$i2]."<br />";
+                echo filesize($path."/".$arr_files[$i2])."kb<br />";
                 echo "<br />";
-                $i3++;
             }
 
             $i2++;
         }
+    $i++;
+}
+*/
+
+while ($i < 4) {
+    $filename_shrt = substr($arr_files[$i], 0, 9);
+    $i2 = 0;
+    $founds = 0;
+    $i4 = 0;
+        while ($i2 < count($arr_files)) {
+            echo $searchMe = "z".strpos($arr_files[$i2], $filename_shrt);
+            if ($searchMe == "z0") {
+                $founds++;
+            }
+            $i2++;
+        }
+
     $i++;
 }
 
