@@ -13,28 +13,29 @@ ini_set('display_errors', 1);
 
 $path = "Images/";
 
-echo "Path: ".$path."</br />";
+#echo "Path: ".$path."</br />";
 
 $arr_files = scandir($path);
 
 #var_dump($arr_files);
 
 $i = 2;
-echo "<br />";
-echo "<br />";
 
 while ($i < count($arr_files)) {
-    echo "Lauf Nr.".$i." <br />";
     $sub = substr($arr_files[$i], 0, 9);
     $i2 = 0;
         while ($i2 < count($arr_files)) {
             $sub2 = "z".strpos($arr_files[$i2], $sub);
-            if ($sub2 == "z0") {
+            $i3 = 0;
+            if ($sub2 == "z0" && $i2 != $i) {
+                echo "Lauf Nr.".$i." <br />";
                 echo $arr_files[$i2]."<br />";
+                echo "<br />";
+                $i3++;
             }
+
             $i2++;
         }
-    echo "<br />";
     $i++;
 }
 
