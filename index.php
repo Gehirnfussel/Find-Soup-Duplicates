@@ -1,7 +1,7 @@
 <?php
 #¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-#   version......: 0.1
-#   last.change..: 2014-03-24
+#   version......: 0.2
+#   last.change..: 2014-03-27
 #   created.by...: Jan Jastrow
 #   contact......: jan@schwerkraftlabor.de
 #   license......: MIT license
@@ -13,46 +13,63 @@ ini_set('display_errors', 1);
 
 $path = "Images/";
 
-#echo "Path: ".$path."</br />";
-
 $arr_files = scandir($path);
 
-#var_dump($arr_files);
-
 $i = 2;
-
-/*
 while ($i < count($arr_files)) {
-    $sub = substr($arr_files[$i], 0, 9);
-    $i2 = 0;
-        while ($i2 < count($arr_files)) {
-            $sub2 = "z".strpos($arr_files[$i2], $sub);
-            if ($sub2 == "z0" ) {
-                echo "Lauf Nr.".$i." <br />";
-                echo $arr_files[$i2]."<br />";
-                echo filesize($path."/".$arr_files[$i2])."kb<br />";
-                echo "<br />";
-            }
-
-            $i2++;
-        }
-    $i++;
-}
-*/
-
-while ($i < 4) {
     $filename_shrt = substr($arr_files[$i], 0, 9);
     $i2 = 0;
-    $founds = 0;
-    $i4 = 0;
+    $founds = array();
         while ($i2 < count($arr_files)) {
-            echo $searchMe = "z".strpos($arr_files[$i2], $filename_shrt);
+            $searchMe = "z".strpos($arr_files[$i2], $filename_shrt);
             if ($searchMe == "z0") {
-                $founds++;
+                $founds[] = $arr_files[$i2];
             }
-            $i2++;
+        $i2++;
         }
+    $i3 = 0;
+    while (count($founds) == 2 && $i3 <= count($arr_files)) {
+        if (is_file($path.$founds[0]) && is_file($path.$founds[1])) {
+            # Look for image size
+            $filesize0 = getimagesize($path.$founds[0])[0];
+            $filesize1 = getimagesize($path.$founds[1])[0];
+            if ($filesize0 > $filesize1) {
+                echo "Deleting $founds[1]<br />";
+                unlink($path.$founds[1]);
+            } else {
+                echo "Deleting $founds[0]<br />";
+                unlink($path.$founds[0]);
+            }
+        }
+        $i3++;
+        unset($founds);
+        $founds = array();
+    }
+    $i3 = 0;
 
+    /* To Do…
+    while (count($founds) == 3 && $i3 <= count($arr_files)) {
+        if (is_file($path.$founds[0]) && is_file($path.$founds[1]) && is_file($path.$founds[2])) {
+            # Look for image size
+            $filesize0 = getimagesize($path.$founds[0])[0];
+            $filesize1 = getimagesize($path.$founds[1])[0];
+            $filesize2 = getimagesize($path.$founds[2])[0];
+            if ($filesize0 < $filesize1 && $filesize0 < $filesize2) {
+                echo "Deleting $founds[0]<br />";
+                #unlink($path.$founds[1]);
+            } elseif ($filesize0 > $filesize1 && $filesize0 < $filesize2) {
+                echo "Deleting $founds[1]<br />";
+                #unlink($path.$founds[0]);
+            } else {
+                echo "Deleting $founds[2]<br />";
+                #unlink($path.$founds[0]);
+            }
+        }
+        $i3++;
+        unset($founds);
+        $founds = array();
+    }
+    */
     $i++;
 }
 
