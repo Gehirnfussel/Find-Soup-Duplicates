@@ -1,4 +1,4 @@
-### Find-Soup-Duplicates ###
+# Find-Soup-Duplicates #
 
 When I download images from my soup I came across some files that had been downloaded twice or more.
 
