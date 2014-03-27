@@ -1,4 +1,4 @@
-= Find-Soup-Duplicates =
+### Find-Soup-Duplicates ###
 
 When I download images from my soup I came across some files that had been downloaded twice or more.
 
@@ -13,7 +13,7 @@ I deleted so many files by hand… but with about 35000 pics that was just… aw
 
 So I wrote this little script to help me find duplicates and delete them (based on resolution (not filesize)).
 
-=== ToDo ===
+### ToDo ###
 
 Make it work with 3 pictures
 
