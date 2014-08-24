@@ -1,7 +1,7 @@
 <?php
 #¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
-#   version......: 0.2
-#   last.change..: 2014-03-27
+#   version......: 0.3
+#   last.change..: 2014-08-24
 #   created.by...: Jan Jastrow
 #   contact......: jan@schwerkraftlabor.de
 #   license......: MIT license
@@ -14,6 +14,11 @@ ini_set('display_errors', 1);
 $path = "Images/";
 
 $arr_files = scandir($path);
+
+if (count($arr_files) <= 2) {
+    echo "No images in Folder “".$path."”. Please provide at least a couple of files.";
+    die();
+}
 
 $i = 2;
 while ($i < count($arr_files)) {
@@ -75,30 +80,6 @@ while ($i < count($arr_files)) {
         $founds = array();
     }
     $i3 = 0;
-
-    /* To Do…
-    while (count($founds) == 3 && $i3 <= count($arr_files)) {
-        if (is_file($path.$founds[0]) && is_file($path.$founds[1]) && is_file($path.$founds[2])) {
-            # Look for image size
-            $filesize0 = getimagesize($path.$founds[0])[0];
-            $filesize1 = getimagesize($path.$founds[1])[0];
-            $filesize2 = getimagesize($path.$founds[2])[0];
-            if ($filesize0 < $filesize1 && $filesize0 < $filesize2) {
-                echo "Deleting $founds[0]<br />";
-                #unlink($path.$founds[1]);
-            } elseif ($filesize0 > $filesize1 && $filesize0 < $filesize2) {
-                echo "Deleting $founds[1]<br />";
-                #unlink($path.$founds[0]);
-            } else {
-                echo "Deleting $founds[2]<br />";
-                #unlink($path.$founds[0]);
-            }
-        }
-        $i3++;
-        unset($founds);
-        $founds = array();
-    }
-    */
     $i++;
 }
 
