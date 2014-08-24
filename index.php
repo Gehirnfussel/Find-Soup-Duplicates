@@ -45,6 +45,35 @@ while ($i < count($arr_files)) {
         unset($founds);
         $founds = array();
     }
+    while (count($founds) == 3 && $i3 <= count($arr_files)) {
+        if (is_file($path.$founds[0]) && is_file($path.$founds[1]) && is_file($path.$founds[2])) {
+            # Look for image size
+            $filesize = array();
+            $filesize[0] = getimagesize($path.$founds[0])[0];
+            $filesize[1] = getimagesize($path.$founds[1])[0];
+            $filesize[2] = getimagesize($path.$founds[2])[0];
+            /*
+            echo $filesize[0].'<br />';
+            echo $filesize[1].'<br />';
+            echo $filesize[2].'<br />';
+            echo 'Max:'.max($filesize).'<br />';
+            */
+            $biggest_file = array_search(max($filesize), $filesize);
+            if ($biggest_file == 0) {
+                echo "Deleting $founds[1]<br />"; unlink($path.$founds[1]);
+                echo "Deleting $founds[2]<br />"; unlink($path.$founds[2]);
+            } elseif ($biggest_file == 1) {
+                echo "Deleting $founds[0]<br />"; unlink($path.$founds[0]);
+                echo "Deleting $founds[2]<br />"; unlink($path.$founds[2]);
+            } elseif ($biggest_file == 2) {
+                echo "Deleting $founds[0]<br />"; unlink($path.$founds[0]);
+                echo "Deleting $founds[1]<br />"; unlink($path.$founds[1]);
+            }
+        }
+        $i3++;
+        unset($founds);
+        $founds = array();
+    }
     $i3 = 0;
 
     /* To Do…
